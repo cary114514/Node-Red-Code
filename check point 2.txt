@@ -1,0 +1,107 @@
+[
+    {
+        "id": "98ace825.590c08",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6aad34a4.a2589c",
+        "type": "inject",
+        "z": "98ace825.590c08",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "430ba310.cda03c"
+            ]
+        ]
+    },
+    {
+        "id": "430ba310.cda03c",
+        "type": "function",
+        "z": "98ace825.590c08",
+        "name": "Payload",
+        "func": "msg.headers={\n        devicekey:\"6CZwWPNowI052nTj\"\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "ac710ec.40ab0f",
+                "2fa69b81.98f824"
+            ]
+        ]
+    },
+    {
+        "id": "ac710ec.40ab0f",
+        "type": "http request",
+        "z": "98ace825.590c08",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://api.mediatek.com/mcs/v2/devices/D4p95bD0/datachannels/Humidity/datapoints.csv",
+        "tls": "",
+        "x": 510,
+        "y": 120,
+        "wires": [
+            [
+                "2497a7fa.4c14f8",
+                "91ca5135.0724e"
+            ]
+        ]
+    },
+    {
+        "id": "2fa69b81.98f824",
+        "type": "http request",
+        "z": "98ace825.590c08",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://api.mediatek.com/mcs/v2/devices/D4p95bD0/datachannels/Temperature/datapoints.csv",
+        "tls": "",
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "2497a7fa.4c14f8",
+                "91ca5135.0724e"
+            ]
+        ]
+    },
+    {
+        "id": "2497a7fa.4c14f8",
+        "type": "debug",
+        "z": "98ace825.590c08",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 740,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "91ca5135.0724e",
+        "type": "http response",
+        "z": "98ace825.590c08",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 740,
+        "y": 180,
+        "wires": []
+    }
+]
