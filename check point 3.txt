@@ -1,0 +1,123 @@
+[
+    {
+        "id": "d2ff6c31.7987e",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1646e212.7200ae",
+        "type": "inject",
+        "z": "d2ff6c31.7987e",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 90,
+        "y": 80,
+        "wires": [
+            [
+                "4de5226f.1959cc",
+                "a8190fad.e49f7"
+            ]
+        ]
+    },
+    {
+        "id": "a8190fad.e49f7",
+        "type": "function",
+        "z": "d2ff6c31.7987e",
+        "name": "Payload",
+        "func": "msg.headers={\n        devicekey:\"iQps40RMApyteWdH\"\n};\nmsg.payload= \"Temperature,,20\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260,
+        "y": 100,
+        "wires": [
+            [
+                "f9f6a62.48fce58"
+            ]
+        ]
+    },
+    {
+        "id": "4de5226f.1959cc",
+        "type": "function",
+        "z": "d2ff6c31.7987e",
+        "name": "Payload",
+        "func": "msg.headers={\n        devicekey:\"iQps40RMApyteWdH\"\n};\nmsg.payload= \"Humidity,,30\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "3025d6f8.57a25a"
+            ]
+        ]
+    },
+    {
+        "id": "3025d6f8.57a25a",
+        "type": "http request",
+        "z": "d2ff6c31.7987e",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/DU5PsCLE/datapoints.csv",
+        "tls": "",
+        "x": 450,
+        "y": 60,
+        "wires": [
+            [
+                "a70586a3.68c278",
+                "524fae6c.e22fa"
+            ]
+        ]
+    },
+    {
+        "id": "f9f6a62.48fce58",
+        "type": "http request",
+        "z": "d2ff6c31.7987e",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/DU5PsCLE/datapoints.csv",
+        "tls": "",
+        "x": 450,
+        "y": 100,
+        "wires": [
+            [
+                "524fae6c.e22fa",
+                "a70586a3.68c278"
+            ]
+        ]
+    },
+    {
+        "id": "a70586a3.68c278",
+        "type": "http response",
+        "z": "d2ff6c31.7987e",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "524fae6c.e22fa",
+        "type": "debug",
+        "z": "d2ff6c31.7987e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 710,
+        "y": 100,
+        "wires": []
+    }
+]
